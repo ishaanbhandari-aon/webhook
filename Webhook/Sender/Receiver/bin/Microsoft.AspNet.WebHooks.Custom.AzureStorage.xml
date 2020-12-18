@@ -1,0 +1,503 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.WebHooks.Custom.AzureStorage</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.WebHooks.DataSecurity">
+            <summary>
+            Provides utility functions for the Data Protection functionality in ASP.NET Core 1.0
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.DataSecurity.GetDataProtector">
+            <summary>
+            This follows the same initialization that is provided when <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider"/>
+            is initialized within ASP.NET Core 1.0 Dependency Injection.
+            </summary>
+            <returns>A fully initialized <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider"/>.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.TableResultExtensions">
+            <summary>
+            Extension methods for <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.TableResultExtensions.IsSuccess(Microsoft.WindowsAzure.Storage.Table.TableResult)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> was successful or not.
+            </summary>
+            <param name="result">The <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> to inspect.</param>
+            <returns><c>true</c> if the result was successful, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.TableResultExtensions.IsNotFound(Microsoft.WindowsAzure.Storage.Table.TableResult)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> was referencing an non-existing entity.
+            </summary>
+            <param name="result">The <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> to inspect.</param>
+            <returns><c>true</c> if the entity was not found, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.TableResultExtensions.IsConflict(Microsoft.WindowsAzure.Storage.Table.TableResult)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> represents a conflict
+            causing the operation to fail.
+            </summary>
+            <param name="result">The <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> to inspect.</param>
+            <returns><c>true</c> if the result was conflicting, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.TableResultExtensions.IsServerError(Microsoft.WindowsAzure.Storage.Table.TableResult)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> represents an internal
+            server error causing the operation to fail.
+            </summary>
+            <param name="result">The <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> to inspect.</param>
+            <returns><c>true</c> if the result was an internal server error, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.AzureSender_SerializeFailure">
+            <summary>
+              Looks up a localized string similar to Could not serialize message: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.AzureStore_BadWebHook">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; could not be retrieved from Azure Table store: {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.AzureStore_NoConnectionString">
+            <summary>
+              Looks up a localized string similar to Please provide a Microsoft Azure Storage connection string with name &apos;{0}&apos; in the configuration string section of the &apos;Web.Config&apos; file..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.AzureStore_NotFound">
+            <summary>
+              Looks up a localized string similar to No entry was found with partition key &apos;{0}&apos; and row key &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.DequeueManager_ErrorDequeueing">
+            <summary>
+              Looks up a localized string similar to Encountered an error when dequeueing messages from the Azure Queue &apos;{0}&apos;: &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.DequeueManager_GivingUp">
+            <summary>
+              Looks up a localized string similar to Giving up sending WebHook &apos;{0}&apos; after &apos;{1}&apos; attempts..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.DequeueManager_NoProperty">
+            <summary>
+              Looks up a localized string similar to Could not get the property with key &apos;{0}&apos; from the work item with Id &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.DequeueManager_SendFailure">
+            <summary>
+              Looks up a localized string similar to Could not send HTTP request to &apos;{0}&apos;: &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.DequeueManager_Started">
+            <summary>
+              Looks up a localized string similar to This &apos;{0}&apos; instance has already been started. It can only be started once..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.DequeueManager_WebHookStatus">
+            <summary>
+              Looks up a localized string similar to WebHook &apos;{0}&apos; resulted in status code &apos;{1}&apos; on attempt &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_BadContinuationToken">
+            <summary>
+              Looks up a localized string similar to Invalid continuation token: &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_ContainerListError">
+            <summary>
+              Looks up a localized string similar to Could not get the list of containers for this Microsoft Azure Storage account: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_CreateFailed">
+            <summary>
+              Looks up a localized string similar to Creating item in Azure table &apos;{0}&apos; failed with error code: &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_ErrorRetrieving">
+            <summary>
+              Looks up a localized string similar to Could not retrieve the given record with the given partition key and row key: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_InitializationFailure">
+            <summary>
+              Looks up a localized string similar to Could not initialize connection to Microsoft Azure Storage: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_InvalidConnectionString">
+            <summary>
+              Looks up a localized string similar to The connection string is invalid. Please provide a valid Microsoft Azure Storage connection string. You can get Microsoft Azure Storage connection string from the Azure portal..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_InvalidQueryOptionValue">
+            <summary>
+              Looks up a localized string similar to Invalid value &apos;{0}&apos; for query option &apos;{1}&apos;. Please provide a valid value..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_NoCloudStorageAccount">
+            <summary>
+              Looks up a localized string similar to Could not create a &apos;{0}&apos; instance from the connection string..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_OperationFailed">
+            <summary>
+              Looks up a localized string similar to Operation failed with status code {0} and error: &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_QueryFailed">
+            <summary>
+              Looks up a localized string similar to Query operation failed with error: &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_TableListError">
+            <summary>
+              Looks up a localized string similar to Could not get the list of tables for this Microsoft Azure Storage account: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_UnexpectedTableResult">
+            <summary>
+              Looks up a localized string similar to Expected result of type &apos;{0}&apos; but received type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.AzureStorageResources.StorageManager_UnsupportedQueryOption">
+            <summary>
+              Looks up a localized string similar to The query option &apos;{0}&apos; is not allowed. Please use only the supported query options: {1}..
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Storage.IStorageManager">
+            <summary>
+            Provides an abstraction for accessing Microsoft Azure Table Storage.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetAzureStorageConnectionString(Microsoft.AspNet.WebHooks.Config.SettingsDictionary)">
+            <summary>
+            Gets the connection string from the provided <paramref name="settings"/> or throws
+            an exception if not present
+            </summary>
+            <param name="settings">The current <see cref="T:Microsoft.AspNet.WebHooks.Config.SettingsDictionary"/>.</param>
+            <returns>The connection string.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetCloudStorageAccount(System.String)">
+            <summary>
+            Gets a <see cref="T:Microsoft.WindowsAzure.Storage.CloudStorageAccount"/> given a <paramref name="connectionString"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetCloudTable(System.String,System.String)">
+            <summary>
+            Gets a <see cref="T:Microsoft.WindowsAzure.Storage.Table.CloudTable"/> given a <paramref name="connectionString"/> and <paramref name="tableName"/>.
+            </summary>
+            <returns>A new <see cref="T:Microsoft.WindowsAzure.Storage.Table.CloudTable"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetCloudQueue(System.String,System.String)">
+            <summary>
+            Gets a <see cref="T:Microsoft.WindowsAzure.Storage.Queue.CloudQueue"/> given a <paramref name="connectionString"/> and <paramref name="queueName"/>.
+            </summary>
+            <returns>A new <see cref="T:Microsoft.WindowsAzure.Storage.Table.CloudTable"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.AddPartitionKeyConstraint(Microsoft.WindowsAzure.Storage.Table.TableQuery,System.String)">
+            <summary>
+            Adds an explicit partition key constraint to an existing query.
+            </summary>
+            <param name="query">The current <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableQuery"/>.</param>
+            <param name="partitionKey">The partitionKey to add the constraint for.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.ExecuteRetrievalAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,System.String,System.String)">
+            <summary>
+            Gets the value for an entity with a particular <paramref name="partitionKey"/> and <paramref name="rowKey"/>.
+            </summary>
+            <returns>The retrieval result.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.ExecuteQueryAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,Microsoft.WindowsAzure.Storage.Table.TableQuery)">
+            <summary>
+            Executes a Table Storage query, logs any errors, and returns a collection with the resulting 
+            <see cref="T:Microsoft.WindowsAzure.Storage.Table.DynamicTableEntity"/> instances.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.ExecuteAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,Microsoft.WindowsAzure.Storage.Table.TableOperation)">
+            <summary>
+            Executes a Table non-query operation, logs any errors and returns a <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/>. 
+            Inspect the <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/> to see if the status code differs from 2xx meaning that the 
+            operation failed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.ExecuteBatchAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,Microsoft.WindowsAzure.Storage.Table.TableBatchOperation)">
+            <summary>
+            Executes a Table batched operation, logs any errors and returns a collection of <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableResult"/>. 
+            Inspect the collection to see if the status code differs from 2xx meaning that the operation failed in
+            some way.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.ExecuteDeleteAllAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,System.String,System.String)">
+            <summary>
+            Deletes all entities with a given <paramref name="partitionKey"/> that matches the given <paramref name="filter"/>.
+            If <paramref name="filter"/> is <c>null</c> then all entities with the partition key are deleted.
+            </summary>
+            <returns>The number of entities deleted.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.AddMessagesAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,System.Collections.Generic.IEnumerable{Microsoft.WindowsAzure.Storage.Queue.CloudQueueMessage})">
+            <summary>
+            Inserts the given <paramref name="messages"/> to the given <paramref name="queue"/>.
+            </summary>
+            <param name="queue">The <see cref="T:Microsoft.WindowsAzure.Storage.Queue.CloudQueue"/> to insert into the queue.</param>
+            <param name="messages">The messages to add.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetMessagesAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,System.Int32,System.TimeSpan)">
+            <summary>
+            Gets messages from the given <paramref name="queue"/>. 
+            </summary>
+            <param name="queue">The <see cref="T:Microsoft.WindowsAzure.Storage.Queue.CloudQueue"/> to retrieve the messages from.</param>
+            <param name="messageCount">The number of messages to retrieve.</param>
+            <param name="timeout">A <see cref="T:System.TimeSpan"/> specifying the visibility timeout.</param>
+            <returns>A collection of retrieved messages.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.DeleteMessagesAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,System.Collections.Generic.IEnumerable{Microsoft.WindowsAzure.Storage.Queue.CloudQueueMessage})">
+            <summary>
+            Deletes the given <paramref name="messages"/> from the given <paramref name="queue"/>.
+            </summary>
+            <param name="queue">The <see cref="T:Microsoft.WindowsAzure.Storage.Queue.CloudQueue"/> to delete the messages from.</param>
+            <param name="messages">The messages to delete.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetStorageErrorMessage(System.Exception)">
+            <summary>
+            Gets the extended error message from a <see cref="T:Microsoft.WindowsAzure.Storage.StorageException"/> or the Message information from any other <see cref="T:System.Exception"/> type.
+            </summary>
+            <param name="ex">The exception to extract message from.</param>
+            <returns>The exception message.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.IStorageManager.GetStorageStatusCode(System.Exception)">
+            <summary>
+            Gets the status code from a <see cref="T:Microsoft.WindowsAzure.Storage.StorageException"/>.
+            </summary>
+            <param name="ex">The exception to extract message from.</param>
+            <returns>The HTTP status code.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Storage.StorageManager">
+            <summary>
+            Provides utilities for managing connection strings and related information for Microsoft Azure Table Storage.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.#ctor(Microsoft.AspNet.WebHooks.Diagnostics.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNet.WebHooks.Storage.StorageManager"/> class with the given <paramref name="logger"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetAzureStorageConnectionString(Microsoft.AspNet.WebHooks.Config.SettingsDictionary)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetCloudStorageAccount(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetCloudTable(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetCloudQueue(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.AddPartitionKeyConstraint(Microsoft.WindowsAzure.Storage.Table.TableQuery,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.ExecuteRetrievalAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.ExecuteQueryAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,Microsoft.WindowsAzure.Storage.Table.TableQuery)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.ExecuteAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,Microsoft.WindowsAzure.Storage.Table.TableOperation)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.ExecuteBatchAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,Microsoft.WindowsAzure.Storage.Table.TableBatchOperation)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.ExecuteDeleteAllAsync(Microsoft.WindowsAzure.Storage.Table.CloudTable,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.AddMessagesAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,System.Collections.Generic.IEnumerable{Microsoft.WindowsAzure.Storage.Queue.CloudQueueMessage})">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetMessagesAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,System.Int32,System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.DeleteMessagesAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,System.Collections.Generic.IEnumerable{Microsoft.WindowsAzure.Storage.Queue.CloudQueueMessage})">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetStorageErrorMessage(System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Storage.StorageManager.GetStorageStatusCode(System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager">
+            <summary>
+            Provides an event loop which dequeues messages from a Microsoft Azure Queue and then sends the
+            WebHook to the recipients. If the delivery success then the message is removed from the queue, otherwise it remains so that another 
+            attempt can be made. After a given number of attempts the message is discarded without being delivered.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.#ctor(System.String,Microsoft.AspNet.WebHooks.Diagnostics.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager"/> using the given <paramref name="connectionString"/>
+            to identify the Microsoft Azure Storage Queue.
+            </summary>
+            <param name="connectionString">The Microsoft Azure Storage Queue connection string.</param>
+            <param name="logger">The <see cref="T:Microsoft.AspNet.WebHooks.Diagnostics.ILogger"/> instance to use for logging errors and warnings.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.#ctor(System.String,Microsoft.AspNet.WebHooks.Diagnostics.ILogger,System.TimeSpan,System.TimeSpan,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager"/> using the given <paramref name="connectionString"/>
+            to identify the Microsoft Azure Storage Queue.
+            </summary>
+            <param name="connectionString">The Microsoft Azure Storage Queue connection string.</param>
+            <param name="logger">The <see cref="T:Microsoft.AspNet.WebHooks.Diagnostics.ILogger"/> instance to use for logging errors and warnings.</param>
+            <param name="pollingFrequency">The polling frequency by which we request messages from the queue.</param>
+            <param name="messageTimeout">The time allotted to send out the WebHooks request and get a response. If
+            the request has not completed within this time frame, the message will be considered to have failed and
+            it will be attempted again.</param>
+            <param name="maxAttempts">The maximum number of attempts to deliver the WebHook.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.#ctor(System.String,Microsoft.AspNet.WebHooks.Diagnostics.ILogger,System.TimeSpan,System.TimeSpan,System.Int32,System.Net.Http.HttpClient,Microsoft.AspNet.WebHooks.Storage.IStorageManager,Microsoft.AspNet.WebHooks.WebHookSender)">
+            <summary>
+            Intended for unit test purposes
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.Start(System.Threading.CancellationToken)">
+            <summary>
+            Start the event loop of requesting messages from the queue and send them out as WebHooks.
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> which can be used to terminate the event loop.</param>
+            <returns>An awaitable <see cref="T:System.Threading.Tasks.Task"/> representing the event loop.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.DequeueAndSendWebHooks(System.Threading.CancellationToken)">
+            <summary>
+            Dequeues available WebHooks and sends them out to each WebHook recipient.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookDequeueManager.QueuedSender.SendWebHookWorkItemsAsync(System.Collections.Generic.IEnumerable{Microsoft.AspNet.WebHooks.WebHookWorkItem})">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.AzureWebHookSender">
+            <summary>
+            Provides an implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookSender"/> sending WebHooks to a Microsoft Azure Queue for later processing.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookSender.#ctor(Microsoft.AspNet.WebHooks.Storage.IStorageManager,Microsoft.AspNet.WebHooks.Config.SettingsDictionary,Microsoft.AspNet.WebHooks.Diagnostics.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> class with the given <paramref name="manager"/>,
+            <paramref name="settings"/>, and <paramref name="logger"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookSender.SendWebHookWorkItemsAsync(System.Collections.Generic.IEnumerable{Microsoft.AspNet.WebHooks.WebHookWorkItem})">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.AzureWebHookStore">
+            <summary>
+            Provides an implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookStore"/> storing registered WebHooks in Microsoft Azure Table Storage.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.#ctor(Microsoft.AspNet.WebHooks.Storage.IStorageManager,Microsoft.AspNet.WebHooks.Config.SettingsDictionary,Microsoft.AspNet.WebHooks.Diagnostics.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> class with the given <paramref name="manager"/>,
+            <paramref name="settings"/>, and <paramref name="logger"/>.
+            Using this constructor, the data will not be encrypted while persisted to Azure Storage.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.#ctor(Microsoft.AspNet.WebHooks.Storage.IStorageManager,Microsoft.AspNet.WebHooks.Config.SettingsDictionary,Microsoft.AspNetCore.DataProtection.IDataProtector,Microsoft.AspNet.WebHooks.Diagnostics.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> class with the given <paramref name="manager"/>,
+            <paramref name="settings"/>, <paramref name="protector"/>, and <paramref name="logger"/>.
+            Using this constructor, the data will be encrypted using the provided <paramref name="protector"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.CreateStore(Microsoft.AspNet.WebHooks.Diagnostics.ILogger)">
+            <summary>
+            Provides a static method for creating a standalone <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> instance which will
+            encrypt the data to be stored using <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtector"/>.
+            </summary>
+            <param name="logger">The <see cref="T:Microsoft.AspNet.WebHooks.Diagnostics.ILogger"/> instance to use.</param>
+            <returns>An initialized <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.CreateStore(Microsoft.AspNet.WebHooks.Diagnostics.ILogger,System.Boolean)">
+            <summary>
+            Provides a static method for creating a standalone <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> instance.
+            </summary>
+            <param name="logger">The <see cref="T:Microsoft.AspNet.WebHooks.Diagnostics.ILogger"/> instance to use.</param>
+            <param name="encryptData">Indicates whether the data should be encrypted using <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtector"/> while persisted.</param>
+            <returns>An initialized <see cref="T:Microsoft.AspNet.WebHooks.AzureWebHookStore"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.GetAllWebHooksAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.QueryWebHooksAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Func{Microsoft.AspNet.WebHooks.WebHook,System.String,System.Boolean})">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.LookupWebHookAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.InsertWebHookAsync(System.String,Microsoft.AspNet.WebHooks.WebHook)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.UpdateWebHookAsync(System.String,Microsoft.AspNet.WebHooks.WebHook)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.DeleteWebHookAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.DeleteAllWebHooksAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.AzureWebHookStore.QueryWebHooksAcrossAllUsersAsync(System.Collections.Generic.IEnumerable{System.String},System.Func{Microsoft.AspNet.WebHooks.WebHook,System.String,System.Boolean})">
+            <inheritdoc />
+        </member>
+        <member name="T:System.Web.Http.HttpConfigurationExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Web.Http.HttpConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.InitializeCustomWebHooksAzureQueueSender(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Configures a Microsoft Azure Table Storage implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookStore"/>
+            which provides a persistent store for registered WebHooks used by the custom WebHooks module.
+            </summary>
+            <param name="config">The current <see cref="T:System.Web.Http.HttpConfiguration"/>config.</param>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.InitializeCustomWebHooksAzureStorage(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Configures a Microsoft Azure Table Storage implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookStore"/>
+            which provides a persistent store for registered WebHooks used by the custom WebHooks module.
+            Using this initializer, the data will be encrypted using <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtector"/>.
+            </summary>
+            <param name="config">The current <see cref="T:System.Web.Http.HttpConfiguration"/>config.</param>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.InitializeCustomWebHooksAzureStorage(System.Web.Http.HttpConfiguration,System.Boolean)">
+            <summary>
+            Configures a Microsoft Azure Table Storage implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookStore"/>
+            which provides a persistent store for registered WebHooks used by the custom WebHooks module.
+            </summary>
+            <param name="config">The current <see cref="T:System.Web.Http.HttpConfiguration"/>config.</param>
+            <param name="encryptData">Indicates whether the data should be encrypted using <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtector"/> while persisted.</param>
+        </member>
+    </members>
+</doc>
